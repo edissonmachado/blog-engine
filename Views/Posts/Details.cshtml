@@ -1,0 +1,62 @@
+﻿@model Post
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Autor
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AuthorName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt class = "col-sm-2">
+            Last updated
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastChangedOn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+        <dd class="col-sm-10">
+            @switch (Model.State)
+            {
+                case 0:
+                    <span>@PostState.Editable</span>
+                    break;
+                case 1:
+                    <span>@PostState.Pending</span>
+                    break;
+                case 2:
+                    <span>@PostState.Published</span>
+                    break;
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (Model.State == (int)PostState.Editable)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit </a> 
+    }
+<a asp-action="Index"> Back to List</a>
+</div>

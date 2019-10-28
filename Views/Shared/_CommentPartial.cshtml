@@ -1,0 +1,14 @@
+﻿@model BlogEngine.Models.Comment
+
+<div class="col-sm-11 float-right comment-container">
+    <dl class="row">
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dd class="col-sm-10 comment-footer">
+            by @Html.DisplayFor(model => model.AuthorName)
+            (@Html.DisplayFor(model => model.AuthorEmail))
+            , On @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+    </dl>
+</div>

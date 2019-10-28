@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Post>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach (var post in Model)
+{
+    <div style="clear:both;">
+        @await Html.PartialAsync("_PostPartial", post)
+    </div>
+}
+<div style="clear:both"></div>

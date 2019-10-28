@@ -1,0 +1,58 @@
+﻿@model BlogEngine.Models.Post
+
+@{
+    ViewData["Title"] = "Check";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Check</h1>
+
+<h4>Post</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Check">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="AuthorName" class="control-label">Author</label>
+                    <input asp-for="AuthorName" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="AuthorName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label asp-for="Content" class="control-label"></label>
+                    <textarea asp-for="Content" class="form-control" readonly="readonly"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="LastChangedOn" class="control-label">Last update</label>
+                    <input asp-for="LastChangedOn" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="LastChangedOn" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="approve" value="Approve" class="btn btn-primary" />
+                    <input type="submit" name="reject" value="Reject" class="btn btn-danger" />
+                    <input type="submit" name="cancel" value="Cancel" class="btn btn-outline-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Approval">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

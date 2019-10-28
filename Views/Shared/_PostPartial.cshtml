@@ -1,0 +1,30 @@
+﻿@model BlogEngine.Models.Post
+
+<div class="post-container">
+    <h4> @Html.DisplayFor(model => model.Title) </h4>
+    <hr />
+    <dl class="row">
+        <dd class="col-sm-10 comment-footer">
+            by @Html.DisplayFor(model => model.AuthorName)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dd class="col-sm-10 comment-footer">
+            Last changed on @Model.LastChangedOn.ToString("dd-MM-yyy hh:mm tt"), 
+            Approved by @Model.ApproverName
+            , On @Model.ApprovedOn?.ToString("dd-MM-yyy hh:mm tt")
+        </dd>
+    </dl>
+
+</div>
+<div>
+    <a href="#." class="commentPost">Comment</a>
+    @await Html.PartialAsync("_CommentCreatePartial", new Comment { ParentPostId = Model.Id })
+</div>
+<div>
+    @foreach (var comment in Model.Comment)
+    {
+        @await Html.PartialAsync("_CommentPartial", comment)
+    }
+</div>

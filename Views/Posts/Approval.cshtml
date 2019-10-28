@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BlogEngine.Models.Post>
+
+@{
+    ViewData["Title"] = "Approval";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Posts pending for approval</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Author
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                Last update
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastChangedOn)
+            </td>
+            <td>
+                @switch (item.State)
+                {
+                    case 0:
+                        <span>@PostState.Editable</span>
+                        break;
+                    case 1:
+                        <span>@PostState.Pending</span>
+                        break;
+                    case 2:
+                        <span>@PostState.Published</span>
+                        break;
+                }
+            </td>
+            <td>
+                <a asp-action="Check" asp-route-id="@item.Id">Check for approval</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
