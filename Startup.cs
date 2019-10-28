@@ -87,7 +87,7 @@ namespace BlogEngine
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider services)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -113,59 +113,6 @@ namespace BlogEngine
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            CreateStatupUserRoles(services).GetAwaiter().GetResult();
-        }
-
-        private async Task CreateStatupUserRoles(IServiceProvider serviceProvider)
-        {
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
-            IdentityResult checkUserCreation;
-
-            var roleExists = await roleManager.RoleExistsAsync("Writer");
-
-            if (!roleExists)
-            {
-                var role = new IdentityRole();
-                role.Name = "Writer";
-                await roleManager.CreateAsync(role);
-
-                var user = new IdentityUser();
-                user.UserName = "Edisson Writer";
-                user.Email = "edisson.writer@test.com";
-
-                string userPassword = "Writer123.";
-                
-                checkUserCreation = await userManager.CreateAsync(user, userPassword);
-
-                if (checkUserCreation.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, "Writer");
-                }
-            }
-
-            roleExists = await roleManager.RoleExistsAsync("Approver");
-
-            if (!roleExists)
-            {
-                var role = new IdentityRole();
-                role.Name = "Approver";
-                await roleManager.CreateAsync(role);
-
-                var user = new IdentityUser();
-                user.UserName = "Edisson Approver";
-                user.Email = "edisson.approver@test.com";
-
-                string userPWD = "Approver123.";
-
-                checkUserCreation = await userManager.CreateAsync(user, userPWD);
-
-                if (checkUserCreation.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, "Approver");
-                }
-            }
         }
     }
 }
