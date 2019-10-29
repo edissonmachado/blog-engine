@@ -5,7 +5,7 @@ Blog Engine is an MCV .NET Core 2.2 application.
 ## How to run it
 
 Download the package or clone the repository. You'll find all of the files you need to run the application from Visual Studio (VS2019 Community edition was used in this case).
-There is a SQL folder as part as the file structure in which you will find the startup schema and some sample data.
+There is a SQL folder as part as the file structure in which you will find the startup schema and some sample data. An ER diagram can be found in this folder.
 
 ### SQL: Create Schema and add sample data
 
