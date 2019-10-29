@@ -22,15 +22,15 @@ Open BlogEngine.csproj and run it.
 * When adding a comment they will need to fill their Author Name and Email
 
 **Authenticated users (with no role specified)**
-* `Credentials -> Email: user.other@test.com, Password: Other123.`
+* `Credentials -> Email: user.other@test.com, Password: Other123. (finishes in dot)`
 * Same as non-authenticated users, but when commenting, the Author Name and Email will be populated automatically
 
 **Authenticated users (Writer role)**
-* `Credentials: Email: user.writer@test.com, Password: Writer123.`
+* `Credentials: Email: user.writer@test.com, Password: Writer123. (finishes in dot)`
 * After login will be redirected to the Posts section in which the list of their own posts are showed and options are given depending on each post estate.
 * Can also see the Blog section where all of the published posts (own and others') are showed.
 
 **Authenticated users (Approver role)**
-* `Credentials: Email: user.approver@test.com, Password: Approver123.`
+* `Credentials: Email: user.approver@test.com, Password: Approver123. (finishes in dot)`
 * After login will be redirected to the Posts section in which the list of the pending for approval posts are showed.
 * Can also see the Blog section where all of the published posts are showed.
