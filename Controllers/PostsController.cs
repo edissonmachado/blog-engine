@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 using BlogEngine.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BlogEngine.Controllers
 {
@@ -23,16 +24,19 @@ namespace BlogEngine.Controllers
         }
 
         // GET: Posts
+        [Authorize(Roles ="Writer")]
         public IActionResult Index()
         {
             return View(_unitOfWork.Post.GetPostsByAuthors(_userManager.GetUserName(User)));
         }
 
+        [Authorize(Roles = "Approver")]
         public IActionResult Approval()
         {
             return View(_unitOfWork.Post.GetPostsByState((int)PostState.Pending));
         }
         // GET: Posts/Check/5
+        [Authorize(Roles = "Approver")]
         public IActionResult Check(int? id)
         {
             if (id == null)
@@ -54,6 +58,7 @@ namespace BlogEngine.Controllers
         // POST: Posts/Check/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Approver")]
         public IActionResult Check(int id, [Bind("Id,AuthorName,Title,Content,LastChangedOn,State")] Post post, string approve, string reject, string cancel)
         {
             if (!string.IsNullOrEmpty(cancel))
@@ -102,6 +107,7 @@ namespace BlogEngine.Controllers
         }
 
         // GET: Posts/Details/5
+        [Authorize(Roles = "Writer")]
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -120,6 +126,7 @@ namespace BlogEngine.Controllers
         }
 
         // GET: Posts/Create
+        [Authorize(Roles = "Writer")]
         public IActionResult Create()
         {
             return View();
@@ -128,6 +135,7 @@ namespace BlogEngine.Controllers
         // POST: Posts/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Writer")]
         public IActionResult Create([Bind("Id,Title,Content")] Post post)
         {
             if (ModelState.IsValid)
@@ -148,6 +156,7 @@ namespace BlogEngine.Controllers
         }
 
         // GET: Posts/Edit/5
+        [Authorize(Roles = "Writer")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -169,6 +178,7 @@ namespace BlogEngine.Controllers
         // POST: Posts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Writer")]
         public IActionResult Edit(int id, [Bind("Id,AuthorName,Title,Content,LastChangedOn,State")] Post post)
         {
             if (id != post.Id)
@@ -202,6 +212,7 @@ namespace BlogEngine.Controllers
         }
 
         // GET: Posts/Delete/5
+        [Authorize(Roles = "Writer")]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -221,6 +232,7 @@ namespace BlogEngine.Controllers
         // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Writer")]
         public IActionResult DeleteConfirmed(int id)
         {
             var post = _unitOfWork.Post.GetPostById(id);
