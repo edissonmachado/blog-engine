@@ -9,7 +9,7 @@ There is a SQL folder as part as the file structure in which you will find the s
 
 ### SQL: Create Schema and add sample data
 
-Run BlogEngine_Schema.sql script for creating the Blog and its authentication databases (Blog and BlogAuthentication). The script creates also some sample data for the application.
+Run BlogEngine_Schema.sql script (SQL Server 2012) for creating the Blog and its authentication databases (Blog and BlogAuthentication). The script creates also some sample data for the application.
 
 ### Application: Run the code
 
