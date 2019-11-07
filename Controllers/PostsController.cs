@@ -43,16 +43,15 @@ namespace BlogEngine.Controllers
             {
                 return NotFound();
             }
-            using (var unitOfWork = new UnitOfWork())
-            {
-                var post = unitOfWork.Post.GetPostById((int)id);
+            
+            var post = _unitOfWork.Post.GetPostById((int)id);
 
-                if (post == null)
-                {
-                    return NotFound();
-                }
-                return View(post);
-            }            
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return View(post);
+                      
         }
 
         // POST: Posts/Check/5
@@ -163,16 +162,15 @@ namespace BlogEngine.Controllers
             {
                 return NotFound();
             }
-            using (var unitOfWork = new UnitOfWork())
-            {
-                var post = unitOfWork.Post.GetPostById((int)id);
+            
+            var post = _unitOfWork.Post.GetPostById((int)id);
 
-                if (post == null)
-                {
-                    return NotFound();
-                }
-                return View(post);
+            if (post == null)
+            {
+                return NotFound();
             }
+            return View(post);
+           
         }
 
         // POST: Posts/Edit/5
